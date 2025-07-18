@@ -1,11 +1,14 @@
 import React from 'react';
 import { Waves, Facebook, Instagram, Twitter, Mail, Phone } from 'lucide-react';
+import BubbleBackground from './BubbleBackground';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative bg-gradient-to-r from-slate-900 to-slate-800 text-white overflow-hidden pt-0">
+    <footer id="contact" className="relative bg-gradient-to-r from-slate-900 to-slate-800 text-white overflow-hidden pt-0">
+      {/* Üst geçiş için gradient overlay */}
+      <div className="absolute left-0 right-0 top-0 h-16 z-10 pointer-events-none" style={{background: 'linear-gradient(to top, rgba(30,41,59,0) 0%, #101522 100%)'}} />
       {/* Animasyonlu Dalga SVG */}
-      <div className="relative w-full" style={{height:'60px'}}>
+      <div className="relative w-full" style={{height:'60px', zIndex: 2}}>
         <svg viewBox="0 0 1440 60" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="footerwave" x1="0" y1="0" x2="0" y2="1">
@@ -18,30 +21,9 @@ const Footer: React.FC = () => {
             <path d="M0,40 C360,60 1080,0 1440,40 V60 H0 V40 Z" fill="url(#footerwave)" fillOpacity="0.7" />
           </g>
         </svg>
-        {/* Kabarcıklar */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(12)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-cyan-200 opacity-30"
-              style={{
-                width: `${10 + Math.random() * 20}px`,
-                height: `${10 + Math.random() * 20}px`,
-                left: `${Math.random() * 98}%`,
-                bottom: `${Math.random() * 40}px`,
-                animation: `bubbleUp 8s linear infinite ${i * 0.8}s`
-              }}
-            />
-          ))}
-        </div>
-        <style>{`
-          @keyframes bubbleUp {
-            0% { transform: translateY(0) scale(1); opacity: 0.3; }
-            50% { opacity: 0.7; }
-            100% { transform: translateY(-60px) scale(1.2); opacity: 0; }
-          }
-        `}</style>
       </div>
+      {/* Kabarcıklar tüm footerı kaplasın */}
+      <BubbleBackground zIndex={1} />
       {/* İçerik */}
       <div className="px-6 py-12">
         <div className="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
@@ -66,7 +48,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Instagram className="w-5 h-5 text-cyan-300" />
-                <span>@commelinahome</span>
+                <a href="https://instagram.com/commelina_home" target="_blank" rel="noopener noreferrer" className="hover:underline">@commelina_home</a>
               </div>
             </div>
           </div>
@@ -87,7 +69,7 @@ const Footer: React.FC = () => {
               <a href="#" className="group">
                 <Facebook className="w-7 h-7 text-cyan-300 group-hover:animate-wiggle" />
               </a>
-              <a href="#" className="group">
+              <a href="https://instagram.com/commelina_home" target="_blank" rel="noopener noreferrer" className="group">
                 <Instagram className="w-7 h-7 text-cyan-300 group-hover:animate-wiggle" />
               </a>
               <a href="#" className="group">
@@ -114,7 +96,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col items-center md:items-end justify-between h-full">
             <div className="overflow-hidden w-full">
               <div className="whitespace-nowrap animate-marquee text-cyan-200 text-lg font-semibold">
-                Denizden ilham alan tasarımlar, Commelina Home ile evinizde! &nbsp;•&nbsp; Plaj keyfi, kalite ve şıklık bir arada! &nbsp;•&nbsp; Hayalinizdeki tatil için en güzel havlular burada!
+                Denizden ilham alan tasarımlar, Commelina Home ile plaj çantanızda! &nbsp;•&nbsp; Plaj keyfi, kalite ve şıklık bir arada! &nbsp;•&nbsp; Hayalinizdeki tatil için en güzel havlular burada!
               </div>
             </div>
             <style>{`

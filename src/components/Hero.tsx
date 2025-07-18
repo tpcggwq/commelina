@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowDown, Sparkles, Play } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -13,36 +13,39 @@ const Hero: React.FC = () => {
   const logoOpacity = useTransform(scrollY, [0, 300], [1, 0.8]);
   const backgroundY = useTransform(scrollY, [0, 1000], [0, -300]);
 
-  // Parallax için scroll offset
-  const [parallaxY, setParallaxY] = useState(0);
-  useEffect(() => {
-    const handleScroll = () => {
-      setParallaxY(window.scrollY * 0.3); // 0.3 ile yavaş parallax
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const bgImgRef = useRef<HTMLImageElement>(null);
 
+  // Optimize scroll event with requestAnimationFrame
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const scrolled = window.scrollY;
-      const rate = scrolled * -0.5;
-      
-      if (waveRef.current) {
-        waveRef.current.style.transform = `translateY(${rate}px)`;
-      }
-      
-      if (logoRef.current) {
-        logoRef.current.style.transform = `translateY(${rate * 0.3}px)`;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.scrollY;
+          // Parallax image
+          if (bgImgRef.current) {
+            bgImgRef.current.style.transform = `translateY(${scrolled * 0.3}px)`;
+          }
+          // Wave and logo
+          const rate = scrolled * -0.5;
+          if (waveRef.current) {
+            waveRef.current.style.transform = `translateY(${rate}px)`;
+          }
+          if (logoRef.current) {
+            logoRef.current.style.transform = `translateY(${rate * 0.3}px)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <section 
+      id="about"
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
@@ -68,10 +71,11 @@ const Hero: React.FC = () => {
             <path d="M0,40 Q400,100 800,40 T1200,40 V120 H0Z" fill="#22d3ee" fillOpacity="0.10" />
           </motion.svg>
           <img
+            ref={bgImgRef}
             src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=1920"
             alt="Beach Background"
             className="w-full h-full object-cover"
-            style={{ transform: `translateY(${parallaxY}px)`, transition: 'transform 0.1s linear' }}
+            style={{ transition: 'transform 0.1s linear' }}
           />
           
           {/* Animated Overlay Gradients */}
@@ -248,6 +252,12 @@ const Hero: React.FC = () => {
               ]
             }}
             transition={{ duration: 3, repeat: Infinity }}
+            onClick={() => {
+              const section = document.getElementById('koleksiyon');
+              if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
           >
             <span className="relative z-10">Koleksiyonu Keşfet</span>
             

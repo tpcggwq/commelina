@@ -43,13 +43,40 @@ const Header: React.FC<HeaderProps> = ({ onViewChange }) => {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-white hover:text-cyan-200 transition-colors font-medium">
+            <a
+              href="#"
+              className="text-white hover:text-cyan-200 transition-colors font-medium flex items-center gap-1"
+              onClick={e => {
+                e.preventDefault();
+                const section = document.getElementById('about');
+                if (section) section.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <span className="material-symbols-outlined text-lg">home</span>
+              Ana Sayfa
+            </a>
+            <a
+              href="#"
+              className="text-white hover:text-cyan-200 transition-colors font-medium flex items-center gap-1"
+              onClick={e => {
+                e.preventDefault();
+                const section = document.getElementById('koleksiyon');
+                if (section) section.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <span className="material-symbols-outlined text-lg">stacks</span>
               Koleksiyonlar
             </a>
-            <a href="#" className="text-white hover:text-cyan-200 transition-colors font-medium">
-              Hakkında
-            </a>
-            <a href="#" className="text-white hover:text-cyan-200 transition-colors font-medium">
+            <a
+              href="#"
+              className="text-white hover:text-cyan-200 transition-colors font-medium flex items-center gap-1"
+              onClick={e => {
+                e.preventDefault();
+                const section = document.getElementById('contact');
+                if (section) section.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <span className="material-symbols-outlined text-lg">call</span>
               İletişim
             </a>
           </nav>
@@ -58,9 +85,9 @@ const Header: React.FC<HeaderProps> = ({ onViewChange }) => {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => onViewChange('cart')}
-              className="relative p-2 rounded-full hover:bg-white/10 transition-colors group"
+              className="relative p-2 rounded-full hover:bg-white/10 transition-colors group flex items-center gap-1"
             >
-              <ShoppingBag className="w-6 h-6 text-white group-hover:text-cyan-200 transition-colors" />
+              <span className="material-symbols-outlined text-2xl text-white group-hover:text-cyan-200 transition-colors">shopping_cart_checkout</span>
               {itemCount > 0 && (
                 <span className="absolute -top-1 -right-1 w-5 h-5 bg-cyan-500 text-white text-xs rounded-full flex items-center justify-center animate-pulse">
                   {itemCount}
@@ -85,13 +112,43 @@ const Header: React.FC<HeaderProps> = ({ onViewChange }) => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 p-4 bg-[#101522]/95 backdrop-blur-md rounded-lg border border-cyan-900 animate-fadeIn">
             <nav className="flex flex-col space-y-3">
-              <a href="#" className="text-white hover:text-cyan-200 transition-colors font-medium">
+              <a
+                href="#"
+                className="text-white hover:text-cyan-200 transition-colors font-medium flex items-center gap-1"
+                onClick={e => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  const section = document.getElementById('about');
+                  if (section) section.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                <span className="material-symbols-outlined text-lg">home</span>
+                Ana Sayfa
+              </a>
+              <a
+                href="#"
+                className="text-white hover:text-cyan-200 transition-colors font-medium flex items-center gap-1"
+                onClick={e => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  const section = document.getElementById('koleksiyon');
+                  if (section) section.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                <span className="material-symbols-outlined text-lg">stacks</span>
                 Koleksiyonlar
               </a>
-              <a href="#" className="text-white hover:text-cyan-200 transition-colors font-medium">
-                Hakkında
-              </a>
-              <a href="#" className="text-white hover:text-cyan-200 transition-colors font-medium">
+              <a
+                href="#"
+                className="text-white hover:text-cyan-200 transition-colors font-medium flex items-center gap-1"
+                onClick={e => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  const section = document.getElementById('contact');
+                  if (section) section.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                <span className="material-symbols-outlined text-lg">call</span>
                 İletişim
               </a>
             </nav>

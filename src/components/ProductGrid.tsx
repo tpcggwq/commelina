@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BubbleBackground from './BubbleBackground';
 import { Heart, Star, Eye, Play, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Product } from '../hooks/useApp';
@@ -26,7 +27,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
     {
       id: '1',
       name: 'Kırmızı plaj havlusu',
-      price: 129,
+      price: 1700,
       image: 'https://i.imgur.com/Kzmx4wQ.jpeg?auto=compress&cs=tinysrgb&w=600',
       images: [
         'https://i.imgur.com/Kzmx4wQ.jpeg?auto=compress&cs=tinysrgb&w=600',
@@ -34,7 +35,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
         'https://i.imgur.com/msQUaYV.jpeg',
         'https://i.imgur.com/G0ckRcn.jpeg'
       ],
-      category: 'kırmızı',
+      category: 'Kırmızı',
       description: 'Premium cotton blend with ocean-inspired design',
       features: ['100% Premium Cotton', 'Quick-Dry Technology', 'UV Protection'],
       colors: ['Ocean Blue', 'Seafoam Green', 'Coral Pink'],
@@ -43,7 +44,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
     {
       id: '2',
       name: 'Sarı plaj havlusu',
-      price: 99,
+      price: 1700,
       image: 'https://i.imgur.com/tD4Xk6n.jpeg?auto=compress&cs=tinysrgb&w=800',
       images: [
         'https://i.imgur.com/tD4Xk6n.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -60,7 +61,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
     {
       id: '3',
       name: 'Mavi plaj havlusu',
-      price: 89,
+      price: 1700,
       image: 'https://i.imgur.com/0MaQfjs.jpeg?auto=compress&cs=tinysrgb&w=800',
       images: [
         'https://i.imgur.com/0MaQfjs.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -77,7 +78,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
     {
       id: '4',
       name: 'Yeşil plaj havlusu',
-      price: 59,
+      price: 1700,
       image: 'https://i.imgur.com/vsqCs9I.jpeg?auto=compress&cs=tinysrgb&w=800',
       images: [
         'https://i.imgur.com/vsqCs9I.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -85,7 +86,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
         'https://i.imgur.com/msQUaYV.jpeg',
         'https://i.imgur.com/NHgM8z6.jpeg'
       ],
-      category: 'yeşil',
+      category: 'Yeşil',
       description: 'Playful designs perfect for little ones',
       features: ['Soft Cotton', 'Fun Patterns', 'Machine Washable'],
       colors: ['Rainbow', 'Ocean Animals', 'Mermaid Dreams'],
@@ -94,7 +95,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
     {
       id: '5',
       name: 'Turuncu Plaj Havlusu',
-      price: 149,
+      price: 1700,
       image: 'https://i.imgur.com/r78zT5m.jpeg?auto=compress&cs=tinysrgb&w=800',
       images: [
         'https://i.imgur.com/r78zT5m.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -111,7 +112,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
     {
       id: '6',
       name: 'Gri Plaj Havlusu',
-      price: 79,
+      price: 1700,
       image: 'https://i.imgur.com/eibDTZb.jpeg?auto=compress&cs=tinysrgb&w=800',
       images: [
         'https://i.imgur.com/eibDTZb.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -184,8 +185,33 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
     }
     return 'bg-white text-gray-600';
   };
+
+  // Kategoriye uygun gradient background döndüren fonksiyon (sadece badge için)
+  const getCategoryBadgeGradient = (category: string) => {
+    switch (category) {
+      case 'Kırmızı':
+        return 'linear-gradient(to right, #b91c1c, #fca5a5)';
+      case 'Sarı':
+        return 'linear-gradient(to right, #ca8a04, #fde68a)';
+      case 'Mavi':
+        return 'linear-gradient(to right, #1e3a8a, #93c5fd)';
+      case 'Yeşil':
+        return 'linear-gradient(to right, #065f46, #6ee7b7)';
+      case 'Turuncu':
+        return 'linear-gradient(to right, #ea580c, #fdba74)';
+      case 'Gri':
+        return 'linear-gradient(to right, #334155, #cbd5e1)';
+      default:
+        return 'linear-gradient(to right, #06b6d4, #a7f3d0)';
+    }
+  };
+
   return (
-    <section className="luxury-bg py-20 px-6 relative overflow-hidden">
+    <section id="koleksiyon" className="luxury-bg py-20 px-6 relative overflow-hidden">
+      {/* Alt geçiş için gradient overlay */}
+      <div className="absolute left-0 right-0 bottom-0 h-16 z-10 pointer-events-none" style={{background: 'linear-gradient(to bottom, rgba(30,41,59,0) 0%, #101522 100%)'}} />
+      {/* Kabarcıklar arka plan */}
+      <BubbleBackground zIndex={1} />
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(8)].map((_, i) => (
@@ -374,7 +400,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
                           className="absolute top-4 right-4 flex flex-col gap-2"
                         >
                           <motion.button 
-                            className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors"
+                            className="p-2 backdrop-blur-sm rounded-full shadow-lg hover:bg-white/10 transition-colors"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                           >
@@ -382,7 +408,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
                           </motion.button>
                           <motion.button 
                             onClick={() => onProductSelect(product)}
-                            className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors"
+                            className="p-2 backdrop-blur-sm rounded-full shadow-lg hover:bg-white/10 transition-colors"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                           >
@@ -399,13 +425,16 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.2 }}
                     >
-                      <span className="px-3 py-1 bg-gradient-to-r from-teal-500 to-blue-500 text-white text-sm font-medium rounded-full shadow-lg">
+                      <span
+                        className="px-3 py-1 text-white text-sm font-medium rounded-full shadow-lg"
+                        style={{ background: getCategoryBadgeGradient(product.category) }}
+                      >
                         {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
                       </span>
                     </motion.div>
 
                     {/* Enhanced Multi-Layer Wave Effect (Daha Belirgin) */}
-                    <div className="absolute bottom-0 left-0 w-full h-20 overflow-hidden pointer-events-none" style={{zIndex:2}}>
+                    <div className="absolute left-0 w-full h-20 overflow-hidden pointer-events-none" style={{zIndex:2, bottom: '-28px'}}>
                       <svg
                         className="w-full h-full"
                         viewBox="0 0 1440 100"
@@ -440,8 +469,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
                           </path>
                         </g>
                       </svg>
-                      {/* Altı tamamen beyaz kapatıcı */}
-                      <div style={{position:'absolute', bottom:0, left:0, width:'100%', height:'32px', background:'#fff', zIndex:3}}></div>
+                      {/* Altı tamamen beyaz kapatıcı kaldırıldı */}
                     </div>
                   </div>
 
@@ -483,7 +511,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductSelect }) => {
                         }}
                         transition={{ duration: 2, repeat: Infinity }}
                       >
-                        ${product.price}
+                        ₺{product.price}
                       </motion.span>
                       <motion.button
                         onClick={() => onProductSelect(product)}
