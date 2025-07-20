@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Import useEffect
 import { ArrowLeft, Heart, Share2, Star, ShoppingCart, Shield, Truck, RotateCcw } from 'lucide-react';
 import { Product } from '../hooks/useApp';
 import { useCart } from '../contexts/CartContext';
@@ -13,6 +13,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack }) => {
   const [quantity, setQuantity] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
   const { addToCart } = useCart();
+
+  // Scroll to top on component mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []); // Empty dependency array ensures this runs once on mount
 
   if (!product) return null;
 
