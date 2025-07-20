@@ -116,7 +116,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack }) => {
               </p>
               
               <div className="text-4xl font-bold text-teal-600 mb-8">
-                ${product.price}
+                ₺{product.price}
               </div>
             </div>
 
