@@ -145,7 +145,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack }) => {
                 className="flex-1 flex items-center justify-center gap-2 px-8 py-3 bg-gradient-to-r from-teal-500 to-blue-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all transform hover:scale-105"
               >
                 <ShoppingCart className="w-5 h-5" />
-                Add to Cart
+                Sepete ekle
               </button>
               
               <button
@@ -164,7 +164,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack }) => {
 
             {/* Features */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Features</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">Özellikler</h3>
               <ul className="space-y-2">
                 {product.features.map((feature, index) => (
                   <li key={index} className="flex items-center gap-2 text-red">
@@ -180,14 +180,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack }) => {
               <div className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-md">
                 <Shield className="w-6 h-6 text-teal-600" />
                 <div>
-                 <div className="font-medium text-red">Quality guarantee</div>
+                 <div className="font-medium text-red">Garanti Kalite</div>
                 </div>
               </div>
               
               <div className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-md">
                 <Truck className="w-6 h-6 text-teal-600" />
                 <div>
-                  <div className="font-medium text-red">Free Shipping</div>
+                  <div className="font-medium text-red">ücretsiz kargo</div>
                 </div>
              
               </div>
