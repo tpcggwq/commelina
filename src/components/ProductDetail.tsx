@@ -72,10 +72,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack }) => {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              {/* 360° Badge */}
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-medium px-3 py-1 rounded-full text-medium font-medium text-gray-700">
-                360° View
-              </div>
             </div>
 
             {/* Image Gallery */}
